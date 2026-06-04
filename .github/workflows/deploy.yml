@@ -7,9 +7,8 @@ on:
       - master
 
 jobs:
-  build:
+  build-app:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,3 +27,13 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: app
+
+  validate-monitoring:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate docker-compose
+        run: docker compose config
+        working-directory: monitoring
