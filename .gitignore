@@ -1,0 +1,17 @@
+# Terraform
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/*.tfvars
+
+# Next.js
+app/node_modules/
+app/.next/
+app/.env*
+
+# Certificats
+app/*.pem
+
+# OS
+.DS_Store
+Thumbs.db
