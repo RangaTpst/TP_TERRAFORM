@@ -42,9 +42,33 @@ resource "docker_container" "ministack" {
   }
 }
 
-# Bucket S3
-resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-test-bucket-for-students"
+# Bucket principal (chaud)
+resource "aws_s3_bucket" "bucket_hot" {
+  bucket = "bucket-hot"
 
   depends_on = [docker_container.ministack]
+}
+
+# Bucket froid (archive/backup)
+resource "aws_s3_bucket" "bucket_cold" {
+  bucket = "bucket-cold"
+
+  depends_on = [docker_container.ministack]
+}
+
+# Outputs
+output "bucket_hot_name" {
+  value = aws_s3_bucket.bucket_hot.bucket
+}
+
+output "bucket_cold_name" {
+  value = aws_s3_bucket.bucket_cold.bucket
+}
+
+output "s3_endpoint" {
+  value = "http://localhost:4566"
+}
+
+output "s3_region" {
+  value = "us-east-1"
 }
