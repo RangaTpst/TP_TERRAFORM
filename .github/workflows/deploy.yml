@@ -28,6 +28,45 @@ jobs:
         run: npm run build
         working-directory: nextjs
 
+  test-s3:
+    runs-on: ubuntu-latest
+    services:
+      ministack:
+        image: ministackorg/ministack
+        ports:
+          - 4566:4566
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: nextjs/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: nextjs
+
+      - name: Create .env.local
+        run: cp ../.env.example .env.local
+        working-directory: nextjs
+
+      - name: Create S3 buckets
+        run: |
+          aws --endpoint-url=http://localhost:4566 s3 mb s3://bucket-hot
+          aws --endpoint-url=http://localhost:4566 s3 mb s3://bucket-cold
+        env:
+          AWS_ACCESS_KEY_ID: test
+          AWS_SECRET_ACCESS_KEY: test
+          AWS_DEFAULT_REGION: us-east-1
+
+      - name: Build
+        run: npm run build
+        working-directory: nextjs
+
   validate-monitoring:
     runs-on: ubuntu-latest
     steps:
