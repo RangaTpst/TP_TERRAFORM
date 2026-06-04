@@ -5,18 +5,19 @@ terraform/terraform.tfstate.backup
 terraform/*.tfvars
 
 # Next.js
-app/node_modules/
-app/.next/
-app/.env*
+nextjs/node_modules/
+nextjs/.next/
+nextjs/.env*
 
 # Certificats
-app/*.pem
+nextjs/*.pem
 monitoring/*.pem
+*.pem
 
 # OS
 .DS_Store
 Thumbs.db
 
 # Claude
-app/AGENTS.md
-app/CLAUDE.md
+nextjs/AGENTS.md
+nextjs/CLAUDE.md

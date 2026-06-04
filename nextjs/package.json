@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --experimental-https --experimental-https-cert ./nomlocal.local.pem --experimental-https-key ./nomlocal.local-key.pem",
+    "dev": "next dev --experimental-https --experimental-https-cert ./nextjs.local.pem --experimental-https-key ./nextjs.local-key.pem",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

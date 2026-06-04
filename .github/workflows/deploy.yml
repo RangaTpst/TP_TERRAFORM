@@ -18,15 +18,15 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: app/package-lock.json
+          cache-dependency-path: nextjs/package-lock.json
 
       - name: Install dependencies
         run: npm ci
-        working-directory: app
+        working-directory: nextjs
 
       - name: Build
         run: npm run build
-        working-directory: app
+        working-directory: nextjs
 
   validate-monitoring:
     runs-on: ubuntu-latest
@@ -50,21 +50,21 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: app/package-lock.json
+          cache-dependency-path: nextjs/package-lock.json
 
       - name: Install dependencies
         run: npm ci
-        working-directory: app
+        working-directory: nextjs
 
       - name: Build
         run: npm run build
-        working-directory: app
+        working-directory: nextjs
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: next-build
-          path: app/.next
+          path: nextjs/.next
 
   validate-terraform:
     runs-on: ubuntu-latest

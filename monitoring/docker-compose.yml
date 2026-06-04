@@ -7,8 +7,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml
       - ./traefik/dynamic.yml:/etc/traefik/dynamic.yml
-      - ./grafana.nomlocal.local.pem:/certs/cert.pem
-      - ./grafana.nomlocal.local-key.pem:/certs/key.pem
+      - ./grafana.nextjs.local.pem:/certs/cert.pem
+      - ./grafana.nextjs.local-key.pem:/certs/key.pem
 
   node-exporter:
     image: prom/node-exporter:latest
@@ -49,7 +49,7 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.nomlocal.local`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.nextjs.local`)"
       - "traefik.http.routers.grafana.entrypoints=websecure"
       - "traefik.http.routers.grafana.tls=true"
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
